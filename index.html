@@ -1,59 +1,52 @@
-<h1 style="font-size: 4em; text-align: center">Hello</h1>
-<br>
-<br>
-<p1 style="font-size: 3em">This is a test for the Speed Read website and software. This allows you to read faster by eliminating the need to scan a text, rather the words are presented to you in the same location, and are flashed for a fraction of a second.</p1>
-<br>
-<br>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hello, this is a test</title>
-<style>
-body {
-  background: bisque;
-}
-button {
-  font-size: 3em;
-  text-align: center;
-  margin: 0 auto;
-  position: fixed;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: black;
-  background: grey;
-}
-p {
-  font-size: 5em;
-  text-align: center;
-  margin: 0 auto;
-  position: relative;
-  top: 47%;
-}
-</style>
-<script>
-function animateText() {
-  var words = ["A", "quick", "note", "here", "about", "the", "terms", "*real", "estate", "agent*", "and", "*Realtor.*", "These", "terms", "are", "often", "used", "interchangeably,", "but", "they", "are", "different.", "The", "main", "difference", "is", "that", "Realtors", "(always", "spelled", "with", "a", "capital", "R)", 
-               "are", "members", "of", "the", "National", "Association", "of", "Realtors.", "Real", "estate", "agents", "can", "and", "do", "become", "Realtors.", "Realtors", "must", "follow", "the", "codes", "of", "ethics", "set", "by", "the", "NAR;", "real", "estate", "agents", "do", "not.", "The", "key", "benefit", "to", "working", "with", "a", "real", "estate", "agent", "or", "Realtor", "is", "that", "their", "primary", "business", "is", "working", "with", "property", "owners.", "An", "active", "real", "estate", "agent", "will", "prospect", "up", "to", "fifty", "property", "owners", "in", "any", "given", "workday,", "and", "the", "likelihood", "of", "one", "or", "more", "of", "those", "pros-", "pects", "needing", "the", "services", "of", "a", "wholesaler", "is", "high.", "Now", "take", "that", "same", "line", "of", "thinking", "and", "apply", "it", "to", "a", "real", "estate", "investor.", "A", "real", "estate", 
-               "investor", "who", "focuses", "on", "working", "with", "active", "real", "estate", "agents", "could", "network", "with", "fifty", "agents", "a", "day.", "The", "effective", "reach", "of", "an", "investor", "who", "networks", "with", "fifty", "agents", "a", "day", "who", "network", "with", "fifty", "property", "owners", "a", "day", "equals", "2,500", "potential", "property", "owners", "per", "day.", "That", "number", "is", "staggering!"];
-  var i = 0;
-  var interval = setInterval(function() {
-    if (i < words.length) {
-      // Remove the previous word from the text element
-      var text = document.getElementById("text").innerHTML;
-      var previousWord = words[i - 1];
-      text = text.replace(previousWord, "");
-      document.getElementById("text").innerHTML = text + words[i];
-      i++;
-    } else {
-      clearInterval(interval);
+  <title>Word Flashing Website</title>
+  <style>
+    #word-container {
+      width: 500px;
+      height: 200px;
+      padding: 20px;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      border: 1px solid black;
     }
-  }, 100);
-}
-</script>
+  </style>
 </head>
 <body>
-<button onclick="animateText()">Start</button>
-<p id="text"></p>
+  <button id="startPauseButton">Start / Pause</button>
+  <div id="word-container"></div>
+
+  <script>
+    const words = ["A", "quick", "note", "here", "about", "the", "terms", "*real", "estate", "agent*", "and", "*Realtor.*", "These", "terms", "are", "often", "used", "interchangeably,", "but", "they", "are", "different.", "The", "main", "difference", "is", "that", "Realtors", "(always", "spelled", "with", "a", "capital", "R)", "are", "members", "of", "the", "National", "Association", "of", "Realtors.", "Real", "estate", "agents", "can", "and", "do", "become", "Realtors.", "Realtors", "must", "follow", "the", "codes", "of", "ethics", "set", "by", "the", "NAR;", "real", "estate", "agents", "do", "not.", "The", "key", "benefit", "to", "working", "with", "a", "real", "estate", "agent", "or", "Realtor", "is", "that", "their", "primary", "business", "is", "working", "with", "property", "owners.", "An", "active", "real", "estate", "agent", "will", "prospect", "up", "to", "fifty", "property", "owners", "in", "any", "given", "workday,", "and", "the", "likelihood", "of", "one", "or", "more", "of", "those", "pros-", "pects", "needing", "the", "services", "of", "a", "wholesaler", "is", "high.", "Now", "take", "that", "same", "line", "of", "thinking", "and", "apply", "it", "to", "a", "real", "estate", "investor.", "A", "real", "estate", "investor", "who", "focuses", "on", "working", "with", "active", "real", "estate", "agents", "could", "network", "with", "fifty", "agents", "a", "day.", "The", "effective", "reach", "of", "an", "investor", "who", "networks", "with", "fifty", "agents", "a", "day", "who", "network", "with", "fifty", "property", "owners", "a", "day", "equals", "2,500", "potential", "property", "owners", "per", "day.", "That", "number", "is", "staggering!"];
+    let currentIndex = 0;
+    let isFlashing = false;
+    let timer;
+
+    const startPauseButton = document.getElementById("startPauseButton");
+    const wordContainer = document.getElementById("word-container");
+
+    startPauseButton.addEventListener("click", function() {
+      if (isFlashing) {
+        clearInterval(timer);
+        isFlashing = false;
+      } else {
+        timer = setInterval(displayNextWord, 100);
+        isFlashing = true;
+      }
+    });
+
+    function displayNextWord() {
+      if (currentIndex >= words.length) {
+        clearInterval(timer);
+        isFlashing = false;
+        return;
+      }
+
+      wordContainer.textContent = words[currentIndex];
+      currentIndex++;
+    }
+  </script>
 </body>
 </html>
