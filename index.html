@@ -3,21 +3,41 @@
 <head>
   <title>Word Flashing Website</title>
   <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
     #word-container {
       width: 500px;
       height: 200px;
       padding: 20px;
       text-align: center;
-      font-size: 60px;
+      font-size: 36px;
       font-weight: bold;
       border: 1px solid black;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button-container button {
+      margin: 0 10px;
     }
   </style>
 </head>
 <body>
-  <button id="startPauseButton">Start / Pause</button>
-  <button id="resetButton">Reset</button>
   <div id="word-container"></div>
+  <div class="button-container">
+    <button id="startPauseButton">Start / Pause</button>
+    <button id="resetButton">Reset</button>
+  </div>
 
   <script>
     const words = ["When", "the", "stock", "which", "a", "man", "possesses", "is", "no", "more", "than", "sufficient", "to", "maintain", "him", "for", "a", "few", "days", "or", "a", "few", "weeks", "he", "seldom", "thinks", "of", "deriving", "any", "revenue", "from", "it."];
