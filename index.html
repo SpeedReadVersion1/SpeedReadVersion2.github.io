@@ -16,6 +16,7 @@
 </head>
 <body>
   <button id="startPauseButton">Start / Pause</button>
+  <button id="resetButton">Reset</button>
   <div id="word-container"></div>
 
   <script>
@@ -25,6 +26,7 @@
     let timer;
 
     const startPauseButton = document.getElementById("startPauseButton");
+    const resetButton = document.getElementById("resetButton");
     const wordContainer = document.getElementById("word-container");
 
     startPauseButton.addEventListener("click", function() {
@@ -35,6 +37,13 @@
         timer = setInterval(displayNextWord, 120);
         isFlashing = true;
       }
+    });
+
+    resetButton.addEventListener("click", function() {
+      clearInterval(timer);
+      isFlashing = false;
+      currentIndex = 0;
+      wordContainer.textContent = "";
     });
 
     function displayNextWord() {
