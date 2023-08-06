@@ -57,9 +57,9 @@
       <button id="fastForwardButton">Fast Forward</button>
     </div>
     <div class="slider-container">
-      <span>Speed:</span>
-      <input type="range" id="speedSlider" min="77.5" max="750" step="1" value="1000">
-    </div>
+  <span>Speed:</span>
+  <input type="text" id="speedInput" oninput="updateSpeed()" pattern="[0-9]+" min="77.5" max="750" step="1" value="1000">
+</div>
     <div class="button-container">
       <button id="resetButton">Reset</button>
     </div>
@@ -122,7 +122,7 @@
       const fastForwardButton = document.getElementById("fastForwardButton");
       const resetButton = document.getElementById("resetButton");
       const wordContainer = document.getElementById("word-container");
-      const speedSlider = document.getElementById("speedSlider");
+      const speedSlider = document.getElementById("speedInput");
 
       startPauseButton.addEventListener("click", function() {
         if (isFlashing) {
