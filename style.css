@@ -8,7 +8,7 @@
         margin: 0;
       }
 
-      #word-container {
+      .word-container {
         width: 500px;
         height: 200px;
         padding: 20px;
